@@ -1,0 +1,28 @@
+:root {
+	--col1: #003570;
+	--col2: #EC7000;
+	--col3: #002448;
+}
+
+.chapterLine {
+	background-color: var(--col2);
+}
+
+.strip1 {
+	fill: var(--col1);
+}
+.strip2 {
+	fill: var(--col2);
+}
+.strip3 {
+	fill: var(--col3);
+}
+.Colourl {
+	fill: var(--col1);
+}
+.Colour2 {
+	fill: var(--col2);
+}
+.Colour3 {
+	fill: var(--col3);
+}

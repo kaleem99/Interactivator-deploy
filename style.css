@@ -1,0 +1,21 @@
+/* CSS files add styling rules to your content */
+
+body {
+    font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+    margin: 2em;
+  }
+  
+  h1 {
+    font-style: italic;
+    color: #373fff;
+  }
+  .button2 {
+    background-color: #54bbff; /* Best Friend Blue */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }

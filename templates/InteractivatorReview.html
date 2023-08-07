@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<title>Interactivator Review</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="{{ url_for('static', filename = './interactivator.css')}}">
+
+</head>
+
+<body>
+
+	<div class="nav">
+		<h1>{{name}}</h1>
+	</div>
+
+	<div class="iframe-wrapper">
+	</div>
+</body>
+<script>
+	function updateIframe() {
+		var srcAddendum = encodeURI(`plugin[interactivator][courseCode]={{courseCode | safe }}&plugin[interactivator][functions]={{functionList | safe }}&plugin[interactivator][chapters]={{chapters | safe }}&plugin[interactivator][id]={{Wistia_URL | safe }}&plugin[interactivator][intro]={{intro | safe }}&plugin[interactivator][outro]={{outro | safe }}&plugin[interactivator][src]=`+
+		`https://videos.getsmarter.com/Interactive+Video+Content/interactivator.js`)
+		var src = 'https://fast.wistia.net/embed/iframe/{{intro}}?' + srcAddendum
+		document.getElementsByClassName('iframe-wrapper')[0].innerHTML = `
+		<div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+			<div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+				<iframe id = 'iFrame'
+				src="`+ src + `"
+				allow="autoplay; fullscreen" allowtransparency="true" frameborder="0" scrolling="no"
+				class="wistia_embed" name="wistia_embed" allowfullscreen msallowfullscreen width="100%"
+				height="100%"></iframe>
+			</div>
+			</div>
+		</div>
+		`
+	}
+	updateIframe()
+</script>
+
+</html>

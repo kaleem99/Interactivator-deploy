@@ -1,0 +1,1745 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<title>{{videoName}} - CC Editor</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename = './interactivator.css')}}">
+	<link rel="icon" href="{{ url_for('static', filename = 'sub.png')}}">
+	<script src="https://videos.getsmarter.com/Interactive+Video+Content/courseData/{{courseCode}}.js"
+		type="text/javascript"></script>
+	<script src="https://videos.getsmarter.com/Interactive+Video+Content/{{up}}/{{up}}.js"
+		type="text/javascript"></script>
+</head>
+
+<!-- turn on toggles based on previous state. Add functions from list. -->
+
+<body onload="{% for toggleLog in toggleLogs %}toggle('{{toggleLog}}');{% endfor %};updateIfunctionsFromList()">
+	<!-- below hidden div contains templates for all the function UIs. -->
+	<div hidden id="variables">
+		<div class="Ifunction_lowerThird_variables">
+			<select onchange="updateFunctionList()" class="lowerThird_name">
+			</select>
+			<select style="width: auto;" onchange="updateFunctionList()" class="lowerThird_Left_or_Right"
+				name="lowerThird_Left_or_Right" id="lowerThird_Left_or_Right">
+				<option value="left">left</option>
+				<option value="right">right</option>
+			</select>
+		</div>
+
+		<div class="Ifunction_logo_variables">
+			<select onchange="updateFunctionList()" class="logo_type">
+			</select>
+		</div>
+
+		<div class="Ifunction_heading_variables">
+			<input onchange="updateFunctionList()" class="heading_text" type="text" placeholder="heading" \>
+			<label>offset</label>
+			<input onchange="updateFunctionList()" class="heading_offset" type="range" min="-50" max="50" \>
+			<select style="width: auto;" onchange="updateFunctionList()" class="heading_Left_or_Right"
+				name="heading_Left_or_Right" id="heading_Left_or_Right">
+				<option value="left">left</option>
+				<option value="right">right</option>
+			</select>
+		</div>
+
+		<div class="Ifunction_bullet_variables">
+			<span class="inputContainer"><input onchange="updateFunctionList()" class="bullet_text" type="text"
+					placeholder="text" \>
+		</div>
+
+		<div class="Ifunction_playbuzz_variables">
+			<span class="inputContainer"><label>URL</label><input onchange="updateFunctionList()" class="playbuzz_link"
+					type="text" placeholder="link" \></span>
+			<span class="inputContainer"><label>scale</label><input class="'inputNumber" onchange="updateFunctionList()"
+					class="playbuzz_scale" value="1" type="number" step='0.1' \></span>
+			<span class="inputContainer"><label>Y axis position</label><input class="'inputNumber"
+					onchange="updateFunctionList()" class="playbuzz_yAxis" value="25" type="number" \></span>
+			<span class="inputContainer"><input onchange="updateFunctionList()" class="bullet_text" type="text"
+					placeholder="text" \>
+		</div>
+
+		<div class="Ifunction_playbuzz_variables">
+			<span class="inputContainer"><label>URL</label><input onchange="updateFunctionList()" class="playbuzz_link"
+					type="text" placeholder="link" \></span>
+			<span class="inputContainer"><label>scale</label><input class="'inputNumber" onchange="updateFunctionList()"
+					class="playbuzz_scale" value="1" type="number" step='0.1' \></span>
+			<span class="inputContainer"><label>Y axis position</label><input class="'inputNumber"
+					onchange="updateFunctionList()" class="playbuzz_yAxis" value="25" type="number" \></span>
+		</div>
+
+		<div class="Ifunction_Add_Quiz_variables">
+			<span class="QTKDff">Multiple choice</span>
+			<section id="section"></section>
+			<div class="QuizInput Ifunction_Add_Quiz" id="QuizInput">
+				<h2>Please populate input to add quiz</h2>
+				<label>Question</label><br /><input type="text" class="inputQuestion Add_Quiz_text" id="QInput1"
+					onchange="updateFunctionList()" /><br />
+				<div class="OptionsAndVideo">
+					<!-- <div class="inputDiv"> -->
+					<div class="Inputs Add_Quiz_text">
+						<label>Option 1</label>
+						<input class="inputQuestion" type="text" id="QInput" onchange="updateFunctionList()" />
+					</div>
+					<div>
+						<label>Option 2</label>
+						<input class="inputQuestion" type="text" id="QInput" onchange="updateFunctionList()" />
+					</div>
+					<div>
+						<label>Option 3</label>
+						<input class="inputQuestion" type="text" id="QInput" onchange="updateFunctionList()" />
+					</div>
+					<div>
+						<label>Option 4</label>
+						<input class="inputQuestion" type="text" id="QInput" onchange="updateFunctionList()" />
+					</div>
+					<div>
+						<label>Option 5</label>
+						<input class="inputQuestion" type="text" id="QInput" onchange="updateFunctionList()" />
+					</div>
+					<div> <label>Option 6</label>
+						<input class="inputQuestion" type="text" id="QInput" onchange="updateFunctionList()" />
+					</div>
+					<!-- </div> -->
+				</div>
+				<div id="Inputs Add_Quiz"></div>
+				<br /><label>Please choose correct option Answer</label><select onchange="updateFunctionList()"
+					name="cars" id="SelectOptions">
+					<option value="none" selected>None selected</option>
+					<option value="Option 1">Option 1</option>
+					<option value="Option 2">Option 2</option>
+					<option value="Option 3">Option 3</option>
+					<option value="Option 4">Option 4</option>
+					<option value="Option 5">Option 5</option>
+					<option value="Option 6">Option 6</option>
+				</select>
+				<div id="btnsDiv">
+				</div>
+			</div>
+		</div>
+
+		<div class="Ifunction_Video_Interactivity_Timestamp_variables">
+			<span class="QTKDff">Multiple choice</span>
+			<section id="sectionVIQ"></section></code>
+			<div class="QuizInput Ifunction_Video_Interactivity_Timestamp" id="QuizInput{{index}}">
+				<h2>Video will pause at the current time.</h2>
+
+				<input onchange="updateFunctionList()" class="Video_Interactivity_Timestamp_offset" type="range"
+					min="-50" max="50" \>
+				<br />
+				<div class="OptionsAndVideo"><output id="timeDurationVideoInteractive"
+						class="Video_Interactivity_Timestamp_output"></output>
+				</div><br>
+				<div id="btnsDiv">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<form name="myform" method="POST" action="" enctype="multipart/form-data">
+		<div class="row">
+
+			<div id='videoCol' class="column responsive-column">
+				<div style="display: inline-block;">
+
+					<!-- using below hidden divs to store states, I wish I knew React :( -->
+					<div hidden id='autoScroll'>on</div>
+					<div hidden id='IFcount'>{{numInteractives}}</div>
+					<div hidden>
+						<input onchange="" value='1' type="text" name='playRate' id='playRate' />
+						<input id='VidTime' name='VidTime' />
+						<input value='off' id='chapterToggleLog' name='chapterToggleLog' type="checkbox" />
+						<input value='off' id='subToggleLog' name='subToggleLog' type="checkbox" />
+						<input value='off' id='functionToggleLog' name='functionToggleLog' type="checkbox" />
+					</div>
+
+					<button type="button" id="chapterToggle" class="off" style="float: right; right: 50px;"
+						onclick="toggle('chapter')">Chapters</button>
+					<button type="button" id="subToggle" class="off" style="float: right; right: 50px;"
+						onclick="toggle('sub')">Subtitles</button>
+					<button {{interactiveContent}} type="button" id="functionToggle" class="off"
+						style="float: right; right: 50px;" onclick="toggle('function')">Interactivites</button>
+
+					<button type="button" id="printoutToggle" class="off" style="float: right; right: 50px;"
+						onclick="toggleTranscript()">Transcript</button>
+					<h3>CC Editor</h3>
+					<h2><a href="http://interactivator.staging.getsmarter.private/" target="blank">{{videoName}}</a>
+					</h2>
+					<br>
+					<div class="iframe-wrapper">
+						<script src="https://fast.wistia.com/embed/medias/{{Wistia_URL}}.jsonp" async></script>
+						<script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+						<div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+							<div class="wistia_responsive_wrapper"
+								style="height:100%;left:0;position:absolute;top:0;width:100%;">
+								<div class="wistia_embed wistia_async_{{Wistia_URL}} seo=false videoFoam=true"
+									style="height:100%;position:relative;width:100%">
+									<div class="wistia_swatch"
+										style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
+										<img src="https://fast.wistia.com/embed/medias/{{Wistia_URL}}/swatch"
+											style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt=""
+											aria-hidden="true" onload="this.parentNode.style.opacity=1;" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="New">
+						<button type="button" class="newButton">+</button>
+						<span class="newButtons">
+							<button type="button" onclick="newSub()">Subtitle</button>
+							<button type="button" onclick="newChap()">Chapter</button>
+							<select id='interactiveSelect' {{interactiveContent}} onchange="newIFunction(this)">
+								<option id="defaultOption" selected disabled>Interactivity</option>
+								<option id="Ifunction_lowerThird">lowerThird</option>
+								<option id="Ifunction_heading">heading</option>
+								<option id="Ifunction_bullet">bullet</option>
+								<option id="Ifunction_logo">logo</option>
+								<option id="Ifunction_playbuzz">playbuzz</option>
+								<option id="Ifunction_Add_Quiz" value="Add_Quiz">Add Quiz</option>
+								<option id="Ifunction_Video_Interactivity_Timestamp"
+									value="Video_Interactivity_Timestamp">Video Interactivity Timestamp</option>
+							</select>
+						</span>
+
+					</div>
+
+					<button style="float:left; left:0px;" id='Update' class="primary" type="submit">Save</button>
+					<button type="button" onclick="updateFunctionList()">↻</button>
+					<div class="drop-zone">
+						<span class="drop-zone__prompt">Upload XML</span>
+						<input type="file" name="myFile" class="drop-zone__input">
+					</div>
+				</div>
+				<br><br>
+				<details>
+					<summary>
+						Embed Code
+					</summary>
+					<div id="textDisplayCode"></div>
+					<div id="iFrame" contenteditable="true" onclick="copyTextToClipBoard()" oninput="reverseUpdate()">
+					</div>
+				</details>
+				<br><br>
+				<details id="speakerDetails">
+					<summary>Speakers</summary>
+					<div id="speakers">{% for speaker in speakersList %}<input type="text"
+							id="speaker#{{speaker[0]}}_input" name="speaker#{{speaker[0]}}_input" class=""
+							value="{{speaker[1]}}" onchange="updateSpeakers(this)">{% endfor %}</div>
+				</details>
+				<br><br>
+				<details>
+					<summary>Search and replace</summary>
+					<input type="text" id="search" name="search" placeholder="original" class="">
+					<input type="text" id="replace" name="replace" placeholder="replacement">
+					<button type="button" onclick="searchReplace()">replace</button>
+
+				</details>
+				<br><br>
+				<!-- <details id="iFrameQuiz" onclick="copyTextToClipBoard()">
+					<summary>Quiz iFrame</summary>
+					<div style="display:none;" id="functionList">{{functionList}}</div>
+					<input style="display:none;" id="functionListInput" name="functionListInput"
+						value="{{functionList}}">
+				</details> -->
+				<div style="display:none;" id="functionList">{{functionList}}</div>
+				<input style="display:none;" id="functionListInput" name="functionListInput" value="{{functionList}}">
+
+
+			</div>
+
+			<div class="column" style="padding-left: 60px; width: 50%; min-width: 200px;">
+
+				<div>
+					<!-- Transcript -->
+					<pi hidden id='printout'>{{printout |safe }}</p>
+				</div>
+				<br>
+				<!-- CCs actually contains other things beyond subtitles. CCs is master list of interfaces for objects on right of UI. Using Flask it loops through and adds HTML for each -->
+				<span id='CCs'>
+					<script>
+						let chapters = []
+					</script>
+					{% for CC in CCs %}
+					{% if CC[3] == 'CCs' %}
+					<!-- Subtitles -->
+					<!-- NOTE! If you change any of the below you need to also change it below in the newSub() function -->
+
+					{% if CC[6] != '' %}
+					<!-- Speakers -->
+					<select class="speaker" id="{{CC[0]}}/speaker" name="{{CC[0]}}/speaker"
+						onchange="checkIfNewSpeaker(this)">
+						<option value="--New--" id="newSpeaker">--New--</option>
+						{% for speaker in speakersList %}
+						<option class="speaker#{{speaker[0]}}_select" value="{{speaker[1]}}">{{speaker[1]}}</option>
+						{% endfor %}
+					</select>
+					<script>document.getElementById('{{CC[0]}}/speaker').value = '{{CC[6]}}'
+					// console.log('{{CC}}')
+					// console.log("subtitles")
+
+					</script>
+
+					{% endif %}
+
+					<div class="container">
+						<div class="controls">
+							<button title="move in point" tabindex="-1" class="subIn" type="button"
+								onclick="setInOrOut(this,false)">(</button>
+							<button title="move out point" tabindex="-1" class="subOut" type="button"
+								onclick="setInOrOut(this,true)">)</button>
+						</div>
+						<textarea onblur="resetButton(this)" onselect="symbolSwitch(this)"
+							onmouseup="symbolSwitch(this)" class="Inactive sub" onkeydown="autoScrollOff()"
+							onclick="autoScrollOff()" id="{{CC[0]}}/{{CC[1]}}"
+							name="{{CC[0]}}/{{CC[1]}}">{{CC[2]}}</textarea>
+						<div class="controls">
+							<button tabindex="-1" class="small" type="button"
+								onclick="go(this.parentNode.parentNode.getElementsByTagName('textarea')[0])"
+								title="Go to this point in the video">←</button>
+							<button tabindex="-1" id="toggle_newLine{{CC[0]}}/{{CC[1]}}" class="small{{CC[5]}}"
+								type="button" onclick="check('newLine{{CC[0]}}/{{CC[1]}}')"
+								title="New paragraph">↵</button>
+							<input style="display :none;" {{CC[4]}} tabindex="-1" id="newLine{{CC[0]}}/{{CC[1]}}"
+								name="newLine{{CC[0]}}/{{CC[1]}}" type="checkbox">
+						</div>
+						<div class="controls">
+							<button tabindex="-1" class="small" type="button" onclick="makeSpeakerSelect(this)"
+								title="Mark speaker">⁚</button>
+							<button tabindex="-1" class="small" type="button" onclick="makeNotes(this)"
+								title="Make notes">✎</button>
+						</div>
+						<div class="controls">
+
+							<button tabindex="-1" class="small" type="button"
+								onclick="removeContainer(this.parentNode.parentNode)" title="Delete">x</button>
+						</div>
+					</div>
+
+					{% if CC[7] != '' %}
+					<!-- Notes -->
+					<input class="notes" id="{{CC[0]}}/notes" name="{{CC[0]}}/notes" type="text"
+						placeholder="Add notes here ..." value='{{CC[7]}}'>
+					{% endif %}
+					{% endif %}
+
+					{% if CC[3] == 'chapter' %}
+					<!-- Chapters -->
+					<!-- NOTE! If you change any of the below you need to also change it below in the newChap() function -->
+					<div id="Chap{{CC[0]}}" class="container">
+						<div class="controls">
+							<button tabindex="-1" class="small" type="button"
+								onclick="moveChap(this.parentNode.parentNode.id)">()</button>
+						</div>
+						<textarea class="chapter" onkeydown="autoScrollOff()" onclick="autoScrollOff()"
+							id="{{CC[0]}}/{{CC[1]}}" name="{{CC[0]}}/{{CC[1]}}">{{CC[2]}}</textarea>
+						<div class="controls">
+							<button tabindex="-1" class="small" type="button"
+								onclick="go(this.parentNode.parentNode.getElementsByTagName('textarea')[0])"
+								title="Go to this point in the video">←</button>
+							<button tabindex="-1" class="small" onclick="removeContainer(this.parentNode.parentNode)"
+								title="Delete">x</button>
+						</div>
+					</div>
+					<script>
+						chapters.push(['{{CC[0]}}', '{{CC[2]}}'])
+
+					</script>
+					{% endif %}
+					{% endfor %}
+				</span>
+
+			</div>
+			<!-- <div id="body" onload="AddOption()"> -->
+
+			<!-- </div> -->
+
+		</div>
+		</div>
+	</form>
+	<script>
+		let newDataArr = [];
+		let inputQuestion = "";
+		let initialOptions = 0;
+		let correctSelectOption = "";
+		let inputOptionsArr = [];
+		let videoDuration = 0;
+		let videoPausePointArr = [];
+		let isQuizAdded = false;
+		let index = 0;
+		let production = true
+
+		// find 'Ifunction_logo_variables' and add options to the select
+		var logoFunc = document.getElementsByClassName('Ifunction_logo_variables')[0].firstElementChild;
+		console.log(UPLogoData)
+		console.log("UP LOGO")
+		for (var i = 0; i < UPLogoData.length; i++) {
+			var option = document.createElement('option');
+			option.value = UPLogoData[i][1];
+			option.innerHTML = UPLogoData[i][0];
+			logoFunc.appendChild(option);
+		}
+
+		// find 'Ifunction_lowerThird_variables' and add options to the select
+		var lowerThirdFunc = document.getElementsByClassName('Ifunction_lowerThird_variables')[0].firstElementChild;
+		for (var i = 0; i < lwrThirdData.length; i++) {
+			var option = document.createElement('option');
+			option.value = lwrThirdData[i][0];
+			option.innerHTML = lwrThirdData[i][0];
+			lowerThirdFunc.appendChild(option);
+		}
+
+		function searchReplace() {
+			var search = document.getElementById('search').value;
+			var replace = document.getElementById('replace').value;
+			var textAreas = document.getElementsByTagName('textarea')
+			for (var i = 0; i < textAreas.length; i++) {
+				if (textAreas[i].value.indexOf(search) != -1) {
+					textAreas[i].value = textAreas[i].value.replace(search, replace);
+				}
+			}
+		}
+
+
+		// Helps keep list of functions up to date
+		var functionListElem = document.getElementById('functionList');
+		functionListElem.addEventListener('DOMSubtreeModified', function () {
+			var functionListInput = document.getElementById('functionListInput');
+			functionListInput.value = functionListElem.innerHTML;
+		})
+
+
+		// turn everything off for the toggle
+		var container = document.getElementsByClassName('container')
+		for (let i = 0; i < container.length; i++) {
+			container[i].style.display = "none";
+		}
+		function updateFunctionList() {
+			var functionElments = document.getElementsByClassName('function')
+			console.log(functionElments[0])
+			console.log("functionElments", 421)
+			console.log("1".repeat(100))
+			// Loop through function elements and add heading and input values to list to create a string to be evaluated later
+			var functionList = ''
+			for (let i = 0; i < functionElments.length; i++) {
+				functionList += (functionElments[i].getElementsByTagName('h2')[0].innerHTML)
+				functionList += '('
+				var inOut = functionElments[i].parentNode.id.split('/')
+				functionList += '"' + inOut[0] + '","' + inOut[1] + '",'
+				for (let j = 0; j < functionElments[i].getElementsByTagName('input').length; j++) {
+					functionList += '"'
+					functionList += functionElments[i].getElementsByTagName('input')[j].value
+					functionList += '"'
+					if (j < functionElments[i].getElementsByTagName('input').length - 1) {
+						functionList += ','
+					}
+				}
+				for (let j = 0; j < functionElments[i].getElementsByTagName('select').length; j++) {
+					if ((functionElments[i].getElementsByTagName('input').length > 0) || (j > 0)) {
+						functionList += ','
+					}
+					functionList += '"'
+					functionList += functionElments[i].getElementsByTagName('select')[j].value
+					functionList += '"'
+				}
+				functionList += ');'
+			}
+			console.log(functionList, 100)
+			document.getElementById('functionList').innerHTML = functionList
+
+			// Load Wistia JavaScript API and pass variables to Interactivator.js to run functions
+			window._wq = window._wq || [];
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					var courseCode = '{{courseCode}}'
+					var WistiaId = '{{Wistia_URL}}'
+					var intro = '{{intro}}'
+					var outro = '{{outro}}'
+					let startPlay = false
+					// interactivatorData comes from the Flask server version of Interactivator.js and not AWS. The AWS version is used in the Review page and the iFrame output
+					{ { interactivatorData | safe } }
+					// Above code is truncated and does include the execution of the functionList. This is so that the functionList can be updated in the HTML before the code is executed
+					// Find definitions of below functions in Interactivator.js
+					generalLottie()
+					execute(chapters, functionList)
+
+				}
+			});
+			updateIframe(functionList)
+
+		}
+
+		function updateIframe(functionList) {
+
+			var srcAddendum = encodeURI(
+				"plugin[interactivator][courseCode]={{courseCode | safe | safe}}" +
+				"&amp;plugin[interactivator][functions]=" + functionList.innerHTML +
+				"&amp;plugin[interactivator][chapters]={{chapters | safe}}" +
+				"&amp;plugin[interactivator][id]={{Wistia_URL | safe}}" +
+				"&amp;plugin[interactivator][intro]={{intro | safe}}" +
+				"&amp;plugin[interactivator][outro]={{outro | safe}}" +
+				"&amp;plugin[interactivator][src]=https://kaleem99.github.io/hostingContents/content/Interactivator.js")
+			var iFrame = `
+			&lt;iframe src="https://fast.wistia.net/embed/iframe/{{intro | safe}}?`+ srcAddendum + `" 
+			title="1" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" 
+			name="wistia_embed" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" 
+			oallowfullscreen="" msallowfullscreen="" style="zoom: 1;"&gt;&lt;/iframe&gt;
+			`
+			document.getElementById('iFrame').innerHTML = iFrame
+
+			// console.log('{{intro}}', "intro")
+			// console.log("{{Wistia_URL}}", "wistia code");
+			// console.log("{{outro}}", "outro");
+			// console.log("&amp;plugin[interactivator][functions]=")
+		}
+		function interactivate() {
+			window._wq = window._wq || [];
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					var courseCode = '{{courseCode}}'
+					var WistiaId = '{{Wistia_URL}}'
+					var intro = '{{intro}}'
+					var outro = '{{outro}}'
+					let startPlay = false
+					{ { interactivatorData | safe } }
+					execute(chapters, functionList)
+				}
+			})
+		}
+		// When the page first loads, wait a bit for everything to get ready, then run Interactivator.js and execute FunctionList
+		setTimeout(interactivate, 3000)
+
+		function updateSpeakers(element) {
+			var selects = document.getElementsByClassName(element.id.split('_')[0] + '_select')
+			for (let i = 0; i < selects.length; i++) {
+				selects[i].innerHTML = element.value
+				selects[i].value = element.value
+			}
+		}
+		console.log(chapters, 523)
+		function checkIfNewSpeaker(element) {
+			if (element.value == '--New--') {
+				newSpeaker();
+				element.childNodes[element.childElementCount - 1].selected = 'selected';
+			}
+		}
+
+		function newSpeaker() {
+			var speakersDiv = document.getElementById('speakers')
+			var speakerName = document.createElement('input')
+			speakerName.type = 'text'
+			speakerName.id = 'speaker#' + (speakersDiv.childElementCount + 1) + '_input'
+			speakerName.name = 'speaker#' + (speakersDiv.childElementCount + 1) + '_input'
+			speakerName.onchange = function () { updateSpeakers(this) }
+			speakersDiv.appendChild(speakerName)
+			document.getElementById('speakerDetails').open = true
+			speakerName.focus()
+
+			var speakerDivs = document.getElementsByClassName('speaker')
+			for (let i = 0; i < speakerDivs.length; i++) {
+				var speakerSelect = document.createElement('option')
+				speakerSelect.className = 'speaker#' + (speakersDiv.childElementCount) + '_select'
+				speakerDivs[i].append(speakerSelect)
+			}
+		}
+
+		function makeNotes(element) {
+			CCid = element.parentNode.parentNode.getElementsByTagName('textarea')[0].id
+			var TC = CCid.split('/')[0]
+			if (document.getElementById(TC + '/notes') == null) {
+				var newNotes = document.createElement('input')
+				newNotes.type = 'text'
+				newNotes.id = TC + '/notes'
+				newNotes.name = TC + '/notes'
+				newNotes.placeholder = 'Add notes here ...'
+				newNotes.className = 'notes'
+				document.getElementById('CCs').insertBefore(newNotes, element.parentNode.parentNode.nextSibling)
+				newNotes.style.display = 'inLine'
+				newNotes.focus()
+			} else {
+				document.getElementById(TC + '/notes').remove()
+			}
+		}
+
+		function makeSpeakerSelect(element) {
+			// Create a new select element to attatch a speaker change of speaker event to this Subtitle
+			CCid = element.parentNode.parentNode.getElementsByTagName('textarea')[0].id
+			var TC = CCid.split('/')[0]
+			if (document.getElementById(TC + '/speaker') == null) {
+				var speakerSelect = document.createElement('select')
+				speakerSelect.className = 'speaker'
+				speakerSelect.id = TC + '/speaker'
+				speakerSelect.style.display = "inline";
+				speakerSelect.name = TC + '/speaker'
+				document.getElementById('CCs').insertBefore(speakerSelect, element.parentNode.parentNode)
+				var speakersDiv = document.getElementById('speakers')
+				var optionNew = document.createElement('option')
+				optionNew.value = '--New--'
+				optionNew.innerHTML = '--New--'
+				optionNew.id = 'newSpeaker'
+				speakerSelect.appendChild(optionNew)
+				for (let i = 0; i < speakersDiv.childNodes.length; i++) {
+					var option = document.createElement('option')
+					option.value = speakersDiv.childNodes[i].value
+					option.innerHTML = speakersDiv.childNodes[i].value
+					option.className = 'speaker#' + (i + 1) + '_select'
+					speakerSelect.appendChild(option)
+				}
+				if (speakersDiv.childNodes.length == 0) {
+					newSpeaker()
+				}
+				// Alternate between names
+				var selects = document.getElementById('CCs').getElementsByTagName('select')
+				for (let i = 0; i < selects.length; i++) {
+					if ((selects[i].id.split('/')[1] == 'speaker') && (parseFloat(selects[i].id.split('/')[0]) < parseFloat(TC))) {
+						var lastSpeakerIndex = selects[i].selectedIndex
+					}
+				}
+				if (lastSpeakerIndex) {
+					if (speakerSelect.childElementCount > lastSpeakerIndex + 1) {
+						speakerSelect.childNodes[lastSpeakerIndex + 1].selected = 'selected'
+					} else {
+						speakerSelect.childNodes[1].selected = 'selected'
+					}
+				} else {
+					speakerSelect.childNodes[1].selected = 'selected'
+				}
+
+				speakerSelect.onchange = function () { checkIfNewSpeaker(this) }
+			} else {
+				document.getElementById(TC + '/speaker').remove()
+			}
+		}
+
+		function removeContainer(element, id) {
+			if (confirm("Are you sure you want to delete this?")) {
+				element.remove()
+				if (element.children[1].children[0].innerHTML != undefined &&
+					element.children[1].children[0].innerHTML === "AddOption") {
+					return true;
+				}
+				setTimeout(function () {
+					updateFunctionList()
+				}, 1000)
+			}
+
+		}
+
+		function getCCs() {
+			// Run this function to make sure we're working with the most up to date version of UI input for subtitles, chapters and Interactives
+			var CCs = [];
+			var CCElements = document.getElementsByTagName('textarea');
+			for (let i = 0; i < CCElements.length; i++) {
+				CCs.push(CCElements[i].id.split('/'));
+			};
+			return CCs
+		}
+
+		function setOut(element) {
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					var newId = element.id.split('/')
+					newId[1] = video.time()
+					newId = newId.join('/')
+					element.id = newId
+					element.name = newId
+				}
+			})
+			// Wait one second
+			setTimeout(function () {
+				updateFunctionList()
+			}, 500)
+		}
+
+		function setIn(element, funcArgs) {
+			CCs = getCCs();
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					var newId = element.id.split('/')
+					var now = video.time()
+					if (funcArgs) {
+						now = parseFloat(funcArgs[0])
+					}
+					newId[0] = now
+					newId = newId.join('/')
+					element.id = newId
+					element.name = newId
+
+					nextSub = false
+					for (let i = 0; i < CCs.length; i++) {
+						if (parseFloat(CCs[i][0]) > now) {
+							end = parseFloat(CCs[i][0])
+							nextSub = document.getElementById(CCs[i].join('/')).parentNode
+							break
+						}
+					}
+					if (nextSub) {
+						document.getElementById('CCs').insertBefore(element, nextSub)
+					} else {
+						document.getElementById('CCs').append(element)
+					}
+				}
+			})
+			// Wait one second
+			if (funcArgs == undefined) {
+				setTimeout(function () {
+					updateFunctionList()
+				}, 500)
+			}
+
+		}
+
+		function updateIfunctionsFromList() {
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					functionList = document.getElementById('functionList').innerHTML
+
+					if (functionList == 'new') {
+						functionList = 'logo("0","' + video.duration() + '","' + UPLogoData[0][1] + '");lowerThird("5","12","' + lwrThirdData[0][0] + '","left");lowerThird("' + (video.duration() - 12) + '","' + (video.duration() - 5) + '","' + lwrThirdData[0][0] + '","left");'
+						document.getElementById('functionList').innerHTML = functionList
+					}
+					functionListArray = functionList.split(';')
+
+
+					// remove all elements of class function
+
+					functions = document.getElementsByClassName('function')
+					console.log(functions)
+					console.log(712)
+					for (let i = 0; i < functions.length; i++) {
+						functions[i].parentElement.remove()
+					}
+
+					// loop through functionListArray and add functions
+					console.log("functionsList ".repeat(5))
+					for (let i = 0; i < functionListArray.length; i++) {
+						if (functionListArray[i] != '') {
+							// async function update() {
+							var funcName = functionListArray[i].split('(')[0]
+							var funcArgs = functionListArray[i].split('(')[1].slice(1, -2).split('","')
+							document.getElementById('interactiveSelect').value = funcName
+							newIFunction(document.getElementById('interactiveSelect'), funcArgs, funcName)
+							console.log('added function ' + funcName)
+						}
+					}
+
+				}
+			})
+			updateIframe(functionList)
+		}
+		document.getElementById("Update").addEventListener("click", function () {
+			console.log("saving data")
+		})
+		function newIFunction(element, funcArgs, funcName) {
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					var nextSub = false
+					var id = video.time() + '/' + (video.time() + 5)
+					if (funcArgs) {
+						id = funcArgs[0] + '/' + funcArgs[1]
+					}
+					// var functionData = element.options[element.selectedIndex].innerHTML
+					var functionName = element.options[element.selectedIndex].innerHTML
+					if ((functionName == 'Interactivity') || (funcName)) {
+						functionName = funcName;
+						document.getElementById('interactiveSelect').value = funcName
+					}
+					if (element.value === "Add_Quiz") {
+						console.log(funcName)
+						functionName = "Add_Quiz"
+					}
+					if (element.value === "Video_Interactivity_Timestamp") {
+						functionName = "Video_Interactivity_Timestamp"
+						// AddOptionVideoInteractivityQuiz()						
+					}
+					newIFunc = document.createElement('div')
+					newIFunc.id = id
+					newIFunc.className = 'container'
+					newIFunc.innerHTML = `
+					<div class="controls">
+					<button title="move in point" tabindex="-1" class="small" type="button" onclick="setIn(this.parentNode.parentNode);">(</button>
+					<button title="move out point" tabindex="-1" class="small" type="button" onclick="setOut(this.parentNode.parentNode);">)</button>
+					</div>
+					<div class="function" ondblclick="go(this.parentNode)">
+						<h2>`+ functionName + `</h2>
+						</div>
+						<div class="controls">
+							<button tabindex="-1" class="small" type="button" onclick="removeContainer(this.parentNode.parentNode)"title="Delete">x</button>
+							</div>
+							`
+					var IFcount = document.getElementById('IFcount')
+					IFcount.innerHTML = parseInt(IFcount.innerHTML) + 1
+					var functionDiv = newIFunc.getElementsByClassName('function')[0]
+
+					functionDiv.appendChild(document.getElementsByClassName('Ifunction_' + functionName + '_variables')[0].cloneNode(true))
+					if (funcArgs) {
+						newIFunc.id = funcArgs[0] + '/' + funcArgs[1]
+						var inputs = []
+						for (let f = 0; f < newIFunc.getElementsByTagName('input').length; f++) {
+							inputs.push(newIFunc.getElementsByTagName('input')[f])
+						}
+						for (let f = 0; f < newIFunc.getElementsByTagName('select').length; f++) {
+							inputs.push(newIFunc.getElementsByTagName('select')[f])
+						}
+
+						for (let j = 0; j < funcArgs.length - 2; j++) {
+							var funcValue = funcArgs[j + 2]
+							inputs[j].value = funcValue
+						}
+						console.log(inputs)
+						for (let f = 0; f < newIFunc.getElementsByTagName('output').length; f++) {
+							inputs.push(newIFunc.getElementsByTagName('output')[f])
+						}
+
+					}
+					// if (funcArgs && funcName === "Video_Interactivity_Timestamp") {
+					// 	let newResultArr = functionListArray.filter((data) => data.match(/Video_Interactivity_Timestamp/g))
+					// 	console.log(newResultArr)
+					// 	let newTime = "";
+					// 	let divElementsOutput = document.getElementsByTagName("output");
+					// 	console.log(divElementsOutput[0], divElementsOutput[1], "divElementsOutput, divElementsOutput, divElementsOutput")
+					// 	for (let i = 0; i < newResultArr.length; i++) {
+					// 		newTime = newResultArr[i].split(/["]/)[1];
+					// 		console.log(newTime)
+					// 		console.log(divElementsOutput[i], "divElementsOutput")
+					// 		// divElementsOutput[i].value = newTime;
+					// 	}
+					// 	console.log("+ ".repeat(25))
+
+					// }
+					console.log(funcName)
+
+					console.log(newIFunc)
+					setIn(newIFunc, funcArgs)
+					document.getElementById('defaultOption').selected = true
+					var functionToggle = document.getElementById('functionToggle')
+					if (functionToggle.className == 'off') {
+						newIFunc.style.display = "none"
+					}
+					if (newIFunc.getElementsByTagName('input').len > 0) {
+						newIFunc.getElementsByTagName('input')[0].focus()
+					}
+
+				}
+			})
+
+		}
+
+		function newChap(seconds, text) {
+			// Create a new chapter for the UI
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					if (seconds == undefined) {
+						seconds = video.time()
+					}
+					if (text == undefined) {
+						text = ''
+					}
+					var nextSub = false
+					id = seconds + '/0'
+					var newChap = document.createElement('div')
+					newChap.id = 'Chap' + id
+					newChap.name = 'Chap' + id
+					newChap.className = 'container'
+					// NOTE! If you change any of the below you need to also change at the top where it loads from Flask
+					newChap.innerHTML = `
+					<div class="controls">
+							<button tabindex="-1" class="small" type="button" onclick="moveChap('`+ seconds + `')">()</button> 
+						</div>
+					<textarea class="chapter" onkeydown="autoScrollOff()" onclick="autoScrollOff()"
+					id="`+ id + `" name="` + id + `" ondblclick="go()">` + text + `</textarea>
+					<div class="controls">
+							<button tabindex="-1" class="small" type="button"
+								onclick="go(this.parentNode.parentNode.getElementsByTagName('textarea')[0])" title="Go to this point in the video">←</button>
+							<button tabindex="-1" class="small" onclick="removeContainer(this.parentNode.parentNode)"title="Delete">x</button>
+						</div>
+					`
+					setIn(newChap)
+					newChap.style.display = "flex";
+
+				}
+			})
+		}
+
+		function newSub() {
+			// Create a new subtitle for the UI
+			console.log("*".repeat(100))
+			CCs = getCCs();
+			console.log(CCs)
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					var end = video.duration()
+					var nextSub = false
+					var currentSub = false
+					for (let i = 0; i < CCs.length; i++) {
+						if (!currentSub && (CCs[i][0] < video.time()) && (CCs[i][1] > video.time())) {
+							currentSub = document.getElementById(CCs[i].join('/')).parentNode
+						}
+						if (CCs[i][0] > video.time()) {
+							end = CCs[i][0]
+							nextSub = document.getElementById(CCs[i].join('/')).parentNode
+							break
+						}
+					}
+					id = video.time() + '/' + end
+					var newSub = document.createElement('div')
+					newSub.className = "container"
+					// NOTE! If you change any of the below you need to also change at the top where it loads from Flask
+					newSub.innerHTML = `<div class="container">
+						<div class="controls">
+							<button title="move in point" tabindex="-1" class="subIn" type="button"
+								onclick="setInOrOut(this,false)">(</button>
+							<button title="move out point" tabindex="-1" class="subOut" type="button"
+								onclick="setInOrOut(this,true)">)</button>
+						</div>
+						<textarea onblur="resetButton(this)" onselect="symbolSwitch(this)" onmouseup="symbolSwitch(this)" class="Inactive sub"
+							onkeydown="autoScrollOff()" onclick="autoScrollOff()" id="`+ id + `"
+							name="`+ id + `"></textarea>
+						<div class="controls">
+							<button tabindex="-1" class="small" type="button"
+								onclick="go(this.parentNode.parentNode.getElementsByTagName('textarea')[0])"
+								title="Go to this point in the video">←</button>
+							<button tabindex="-1" id="toggle_newLine`+ id + `" class="small off"
+								type="button" onclick="check('newLine`+ id + `')"
+								title="New paragraph">↵</button>
+							<input style="display:none;" tabindex="-1" id="newLine`+ id + `"
+								name="newLine`+ id + `" type="checkbox">
+						</div>
+						<div class="controls">
+							<button tabindex="-1" class="small" type="button" onclick="makeSpeakerSelect(this)"
+								title="Mark speaker">⁚</button>
+							<button tabindex="-1" class="small" type="button"
+								onclick="removeContainer(this.parentNode.parentNode)" title="Delete">x</button>
+						</div>
+					</div>`
+					proceed = true
+					for (let i = 0; i < CCs.length; i++) {
+						if ((video.time() > CCs[i][0]) && (video.time() < CCs[i][1])) {
+							setInOrOut(document.getElementById(CCs[i].join('/')).parentNode, true)
+							// document.getElementById(CCs[i].join('/')).id = video.time() + '/' + CCs[i][1]
+							// document.getElementById(CCs[i].join('/')).name = video.time() + '/' + CCs[i][1]
+
+						}
+					}
+					if (nextSub && proceed) {
+						document.getElementById('CCs').insertBefore(newSub, nextSub)
+					} else if (proceed) {
+						document.getElementById('CCs').append(newSub)
+					}
+					if (nextSub) {
+						if (nextSub.id.split('/')[1] <= video.time()) {
+							nextSub.id = video.time() + '/' + nextSub.id.split('/')[1]
+						}
+					}
+					newSub.style.display = "flex"
+				}
+			})
+		}
+
+		function resetButton(element) {
+			var buttons = element.parentNode.getElementsByTagName('button')
+			for (let i = 0; i < buttons.length; i++) {
+				if (buttons[i].innerHTML == '↑') {
+					buttons[i].innerHTML = '('
+					buttons[i].className = 'subIn'
+				}
+				if (buttons[i].innerHTML == '↓') {
+					buttons[i].innerHTML = ')'
+					buttons[i].className = 'subOut'
+				}
+			}
+		}
+
+		function symbolSwitch(element) {
+			// changes the in/out buttons to up/down if the user selects the text at the begining or end. 
+			var selection = document.getSelection().toString()
+			var allText = element.value
+			var buttons = element.parentNode.getElementsByTagName('button')
+			if (selection == '') {
+				resetButton(element)
+			} else if ((allText.startsWith(selection)) && (element.className.includes('Active'))) {
+				for (let i = 0; i < buttons.length; i++) {
+					if (buttons[i].innerHTML == '(') {
+						buttons[i].innerHTML = '↑'
+						buttons[i].className = 'rollUp'
+					}
+				}
+
+			} else if ((allText.endsWith(selection)) && (element.className.includes('Active'))) {
+				for (let i = 0; i < buttons.length; i++) {
+					if (buttons[i].innerHTML == ')') {
+						buttons[i].innerHTML = '↓'
+						buttons[i].className = 'rollDown'
+					}
+				}
+			} else {
+				resetButton(element)
+			}
+		}
+
+		function replaceLast(find, replace, string) {
+			// This allows user to change the in/out point and move text simultaneously. (see symbolSwitch())
+			var lastIndex = string.lastIndexOf(find);
+
+			if (lastIndex === -1) {
+				return string;
+			}
+
+			var beginString = string.substring(0, lastIndex);
+			var endString = string.substring(lastIndex + find.length);
+
+			return beginString + replace + endString;
+		}
+		function Video_Interactivity_Timestamp(enterTime, endTime) {
+			console.log(enterTime)
+			let milliSec = enterTime * 1000;
+			window._wq = window._wq || [];
+			_wq.push({
+				id: '{{Wistia_URL}}',
+				onReady: function (video) {
+					console.log(video)
+					let timer = setInterval(() => {
+						if (parseInt(video.time()) == parseInt(enterTime)) {
+							video.pause();
+							console.log("stopped");
+							clearInterval(timer);
+						}
+					}, 1000);
+				},
+			});
+		}
+		//   let AddQuizChecker = false;
+
+		function Add_Quiz(...args) {
+			//   alert("calling function")
+
+
+			let enterTime = args[0];
+			let QuestionOption2 = args.slice(2);
+			console.log(1000)
+			let milliSec = enterTime * 1000;
+			window._wq = window._wq || [];
+			_wq.push({
+				id: '{{Wistia_URL}}',
+				onReady: function (video) {
+					let timer = setInterval(() => {
+						if (parseInt(video.time()) == parseInt(enterTime)) {
+							video.pause();
+							console.log("stopped");
+							console.log(QuestionOption2[0])
+							console.log(QuestionOption2.slice(1))
+							clearInterval(timer);
+							// AddQuizChecker = true;
+						}
+					}, 1000);
+				},
+			});
+
+		}
+		function setInOrOut(node, out) {
+			console.log(node, out, 0)
+			console.log("*".repeat(10))
+			var selection = document.getSelection().toString()
+			var textarea = node.parentNode.parentNode.getElementsByTagName('textarea')[0]
+			var allText = textarea.value
+
+			// Roll refers to the ↑ functionality of the in/out buttons.
+			if ((allText.startsWith(selection)) && (textarea.className.includes('Active'))) { var roll = 'up' }
+			else if ((allText.endsWith(selection)) && (textarea.className.includes('Active'))) { var roll = 'down' }
+			else { var roll = false }
+
+			var CCs = [];
+			var CCElements = document.getElementsByTagName('textarea');
+			for (let i = 0; i < CCElements.length; i++) {
+				if (CCElements[i].id.split('/')[1] != '0') {
+					CCs.push(CCElements[i].id.split('/'));
+				}
+			};
+
+			// Now we are going to access video.time() to set the in/out point based on position in the video. So we have to summon the unholy Wistia Javascript API from the depths of hell.
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					var subText = node.parentNode.parentNode.getElementsByTagName('textarea')[0]
+
+					var oldTimes = subText.id.split('/')
+					var newTimes = subText.id.split('/')
+
+					var speakerSelect = document.getElementById(oldTimes[0] + '/speaker')
+					var newlineButton = document.getElementById('toggle_newLine' + subText.id)
+					var newlineCheckbox = document.getElementById('newLine' + subText.id)
+
+					for (let i = 0; i < CCs.length; i++) {
+
+						// Find out CC num
+						if ((CCs[i][0] == oldTimes[0]) && (CCs[i][1] == oldTimes[1])) {
+							if (i > 0) {
+								var preSub = document.getElementById(CCs[i - 1][0] + '/' + CCs[i - 1][1])
+							}
+							if (i < CCs.length - 1) {
+								var nextSub = document.getElementById(CCs[i + 1][0] + '/' + CCs[i + 1][1])
+							}
+							// Make sure it's not beyond sub's direct neighbours
+							//Check if it's first or last
+							if ((i == 0) || (i == CCs.length - 1)) {
+								if (out) {
+									newTimes[1] = video.time();
+									if (CCs[i + 1]) {
+										if ((CCs[i + 1][0] < video.time()) || (roll == 'down')) {
+											nextSub.id = video.time() + '/' + CCs[i + 1][1]
+											nextSub.name = video.time() + '/' + CCs[i + 1][1]
+										}
+										if (roll == 'down') {
+											// Move text here and copy to all 4 other places
+											nextSub.value = selection + ' ' + nextSub.value
+											subText.value = replaceLast(selection, '', subText.value)
+										}
+									}
+								}
+								else {
+									newTimes[0] = video.time();
+									if (CCs[i - 1]) {
+										if ((CCs[i - 1][1] > video.time()) || (roll == 'up')) {
+											preSub.id = CCs[i - 1][0] + '/' + video.time()
+											preSub.name = CCs[i - 1][0] + '/' + video.time()
+										}
+
+										if (roll == 'up') {
+											preSub.value = preSub.value + ' ' + selection
+											subText.value = subText.value.replace(selection, '')
+										}
+									}
+								}
+
+
+								subText.id = newTimes[0] + "/" + newTimes[1]
+								subText.name = newTimes[0] + "/" + newTimes[1]
+
+								if (speakerSelect) {
+									speakerSelect.id = newTimes[0] + '/speaker'
+									speakerSelect.name = newTimes[0] + '/speaker'
+								}
+								newlineButton.id = 'toggle_newLine' + newTimes[0] + "/" + newTimes[1]
+								newlineButton.onclick = function () { check('newLine' + newTimes[0] + "/" + newTimes[1]) }
+								newlineCheckbox.id = 'newLine' + newTimes[0] + "/" + newTimes[1]
+								newlineCheckbox.name = 'newLine' + newTimes[0] + "/" + newTimes[1]
+							}
+							else if ((video.time() > CCs[i - 1][0]) && (video.time() < CCs[i + 1][1])) {
+								if (out) {
+									newTimes[1] = video.time()
+									// Move next in if necessary
+									if ((CCs[i + 1][0] < video.time()) || (roll == 'down')) {
+										nextSub.id = video.time() + '/' + CCs[i + 1][1]
+										nextSub.name = video.time() + '/' + CCs[i + 1][1]
+									}
+									if (roll == 'down') {
+										// Move text here and copy to all 4 other places
+										nextSub.value = selection + ' ' + nextSub.value
+										subText.value = replaceLast(selection, '', subText.value)
+									}
+
+								} else {
+									newTimes[0] = video.time()
+									// Move previous out if necessary
+									if ((CCs[i - 1][1] > video.time()) || (roll == 'up')) {
+										preSub.id = CCs[i - 1][0] + '/' + video.time()
+										preSub.name = CCs[i - 1][0] + '/' + video.time()
+									}
+									if (roll == 'up') {
+										// Move text here and copy to all 4 other places
+										preSub.value = preSub.value + ' ' + selection
+										subText.value = subText.value.replace(selection, '')
+									}
+								}
+
+								subText.id = newTimes[0] + "/" + newTimes[1]
+								subText.name = newTimes[0] + "/" + newTimes[1]
+
+								if (speakerSelect) {
+									speakerSelect.id = newTimes[0] + '/speaker'
+									speakerSelect.name = newTimes[0] + '/speaker'
+								}
+								newlineButton.id = 'toggle_newLine' + newTimes[0] + "/" + newTimes[1]
+								newlineButton.onclick = function () { check('newLine' + newTimes[0] + "/" + newTimes[1]) }
+								newlineCheckbox.id = 'newLine' + newTimes[0] + "/" + newTimes[1]
+								newlineCheckbox.name = 'newLine' + newTimes[0] + "/" + newTimes[1]
+							} else {
+								alert('Subtitles cannot overlap')
+							}
+						}
+					}
+				}
+			})
+		}
+
+		function check(id) {
+			// Updates new paragraph toggle so it persists when the user moves cursor away from the subtitle
+			if (document.getElementById(id).checked) {
+				document.getElementById(id).checked = false
+				document.getElementById("toggle_" + id).className = "small off"
+			} else {
+				document.getElementById(id).checked = true
+				document.getElementById("toggle_" + id).className = "small on"
+			}
+		}
+
+		function moveChap(chapId) {
+			// Chapters don't have out points so they work differently
+			CCs = getCCs();
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					chap = document.getElementById(chapId);
+					console.log(chap)
+					chap.id = 'Chap' + video.time();
+					chap.name = 'Chap' + video.time();
+					console.log(chap.id)
+					chap.getElementsByTagName('textarea')[0].id = video.time() + '/0'
+					chap.getElementsByTagName('textarea')[0].name = video.time() + '/0'
+					chap.getElementsByTagName('button')[0].setAttribute('onclick', "moveChap('Chap" + video.time() + "')")
+					var notFound = true
+					for (let i = 0; i < CCs.length; i++) {
+						if (video.time() < parseFloat(CCs[i][0])) {
+							console.log('about to move to ' + CCs[i][0])
+							document.getElementById('CCs').insertBefore(chap, document.getElementById(CCs[i][0] + '/' + CCs[i][1]))
+							notFound = false
+							break
+						}
+					}
+					if (notFound) {
+						document.getElementById('CCs').append(chap)
+					}
+				}
+			})
+
+		}
+
+		var isInViewport = function (elem) {
+			var distance = elem.getBoundingClientRect();
+			return (
+				distance.top >= 0 &&
+				distance.left >= 0 &&
+				distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+				distance.right <= (window.innerWidth || document.documentElement.clientWidth)
+			);
+		};
+
+		window._wq = window._wq || [];
+		_wq.push({
+			id: "{{Wistia_URL}}",
+			options: {
+				plugin: {
+					"captions-v1": {
+						onByDefault: true,
+						language: 'eng'
+					},
+				},
+				time: '{{VidTime}}'
+			},
+			onReady: function (video) {
+				// Remember playback speed
+				video.playbackRate('{{playRate}}');
+				video.bind("playbackratechange", function (playbackRate) {
+					document.getElementById('playRate').value = playbackRate;
+				});
+
+				video.bind("play", function () {
+					document.getElementById('autoScroll').innerHTML = "on";
+				});
+
+				video.bind("pause", function () {
+					CCs = getCCs();
+					for (let i = 0; i < CCs.length; i++) {
+						elmnt = document.getElementById(CCs[i][0] + '/' + CCs[i][1])
+						if (elmnt.style.color == 'black') {
+							elmnt.focus();
+						}
+					};
+
+				});
+
+				video.bind("seek", function () {
+					CCs = getCCs();
+					for (let i = 0; i < CCs.length; i++) {
+						document.getElementById('autoScroll').innerHTML = "on"
+					}
+				});
+
+				// Hilights the element that is currently playing 
+				video.bind("timechange", function () {
+					document.getElementById('VidTime').value = video.time();
+					var functions = document.getElementsByClassName('function')
+					for (let i = 0; i < functions.length; i++) {
+						start = functions[i].parentNode.id.split('/')[0]
+						end = functions[i].parentNode.id.split('/')[1]
+						if ((video.time() >= start) && (video.time() < end)) {
+							functions[i].style.backgroundColor = "#62a7d1"
+							functions[i].style.color = "black"
+						} else {
+							functions[i].style.backgroundColor = "#1E252B"
+							functions[i].style.color = "#DDDDDD"
+						}
+					}
+
+					CCs = getCCs();
+					for (let i = 0; i < CCs.length; i++) {
+						elmnt = document.getElementById(CCs[i][0] + '/' + CCs[i][1])
+						if ((video.time() >= CCs[i][0]) && (video.time() <= CCs[i][0] + 1)) {
+							elmnt.style.border = '2px solid #fc4b00';
+							if (elmnt.className.includes('sub')) {
+								elmnt.className = elmnt.className.replace('Inactive', 'Active');
+							}
+						}
+						else if ((video.time() > CCs[i][0]) && (video.time() < CCs[i][1])) {
+							elmnt.style.border = '2px solid transparent';
+							if (elmnt.className.includes('sub')) {
+								elmnt.className = elmnt.className.replace('Inactive', 'Active');
+							}
+
+							if ((isInViewport(elmnt) == false) && (document.getElementById('autoScroll').innerHTML == "on")) {
+								elmnt.scrollIntoView();
+							}
+						} else {
+							elmnt.style.border = '2px solid transparent';
+							if (elmnt.className.includes('sub')) {
+								elmnt.className = elmnt.className.replace('Active', 'Inactive');
+							}
+						}
+					}
+				});
+			}
+		});
+
+		function go(goTime) {
+			// Go to a specific time in the video
+			if (goTime == undefined) {
+				goTime = document.activeElement.id.split('/')[0]
+			}
+			else if (isNaN(goTime)) {
+				goTime = goTime.id.split('/')[0]
+			}
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					video.time(goTime);
+					elmnt = document.getElementById(goTime);
+				}
+			})
+		};
+
+		function pause() { _wq.push({ id: '{{Wistia_URL}}', onReady: function (video) { video.pause(); } }) };
+		function play() { _wq.push({ id: '{{Wistia_URL}}', onReady: function (video) { video.play(); } }) };
+
+		function playPause() {
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					// setVideoTime(video.time())
+					if (video.state() == 'playing') {
+						video.pause();
+					} else {
+						video.play();
+					}
+				}
+			})
+		};
+
+
+		function autoScrollOff() {
+			document.getElementById('autoScroll').innerHTML = "off";
+		}
+
+		scrollToMyRef = (id) => {
+			var ref = document.getElementById(id);
+			setTimeout(function () {
+				ref.scrollIntoView({
+					behavior: "smooth",
+					block: "start",
+				});
+			}, 100);
+		};
+
+		function toggleTranscript() {
+			var button = document.getElementById("printoutToggle");
+			var things = document.getElementById("printout")
+			if (button.className == "on") {
+				things.hidden = true
+				button.className = "off"
+			} else {
+				scrollToMyRef("printout")
+				things.hidden = false
+				button.className = "on"
+			}
+		};
+
+		function toggle(className) {
+			// Toggle Transcript, Interactives, Subtitles or Chapters on or off
+
+			var button = document.getElementById(className + "Toggle");
+			var log = document.getElementById(className + "ToggleLog");
+			var chaps = document.getElementsByClassName(className)
+			for (let i = 0; i < chaps.length; i++) {
+				if (button.className == "on") {
+					chaps[i].parentNode.style.display = "none";
+				} else {
+					chaps[i].parentNode.style.display = "flex";
+				}
+			}
+			if (className == 'sub') {
+				var speakers = document.getElementsByClassName('speaker')
+				for (let i = 0; i < speakers.length; i++) {
+					if (button.className == "on") {
+						speakers[i].style.display = "none";
+					} else {
+						speakers[i].style.display = "inline";
+					}
+				}
+				var notes = document.getElementsByClassName('notes')
+				for (let i = 0; i < notes.length; i++) {
+					if (button.className == "on") {
+						notes[i].style.display = "none";
+					} else {
+						notes[i].style.display = "inline";
+					}
+				}
+			}
+			if (button.className == "on") {
+				button.className = "off"
+				log.checked = false
+			} else {
+				button.className = "on"
+				log.checked = true
+			}
+		};
+
+		document.getElementById('Update').addEventListener('click', function () {
+			_wq.push({
+				id: '{{Wistia_URL}}', onReady: function (video) {
+					video.pause();
+				}
+			})
+		});
+
+		document.addEventListener('keydown', function (event) {
+			if (event.shiftKey && event.key === ' ') {
+				event.preventDefault();
+				playPause();
+			};
+
+
+
+
+		});
+		document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+			const dropZoneElement = inputElement.closest(".drop-zone");
+
+			dropZoneElement.addEventListener("click", (e) => {
+				inputElement.click();
+			});
+
+			inputElement.addEventListener("change", (e) => {
+				if (inputElement.files.length) {
+					updateThumbnail(dropZoneElement, inputElement.files[0]);
+				}
+			});
+
+			dropZoneElement.addEventListener("dragover", (e) => {
+				e.preventDefault();
+				dropZoneElement.classList.add("drop-zone--over");
+			});
+
+			["dragleave", "dragend"].forEach((type) => {
+				dropZoneElement.addEventListener(type, (e) => {
+					dropZoneElement.classList.remove("drop-zone--over");
+				});
+			});
+
+			dropZoneElement.addEventListener("drop", (e) => {
+				e.preventDefault();
+				// If the user uploads an XML convert the markers to Chapters and Interactive functions based on Paper Edit conventions
+
+				if (e.dataTransfer.files.length) {
+					inputElement.files = e.dataTransfer.files;
+					var file = e.dataTransfer.files[0]
+
+					if (file.name.split('.')[1] == 'xml') {
+						parser = new DOMParser();
+						let reader = new FileReader();
+						reader.readAsText(file);
+						reader.onload = function () {
+							var newChapters = []
+							var newFunctions = ''
+							xmlData = parser.parseFromString(reader.result, "text/xml")
+							var sequence = xmlData.getElementsByTagName('sequence')[0]
+							for (let i = 0; i < sequence.children.length; i++) {
+								if (sequence.children[i].tagName == 'rate') {
+									timebase = parseFloat(sequence.children[i].getElementsByTagName('timebase')[0].innerHTML)
+								}
+							}
+							var markers = sequence.getElementsByTagName('marker')
+							for (let i = 0; i < markers.length; i++) {
+								var time = parseFloat(markers[i].getElementsByTagName('in')[0].innerHTML) / timebase
+								var name = markers[i].getElementsByTagName('name')[0].innerHTML
+								var prefix = name.split('~')[0]
+								var text = name.split('~')[1]
+								if (prefix == 'C') {
+									console.log('chapter: ' + time + ':' + text)
+									newChapters.push({
+										time: time,
+										text: text
+									})
+								}
+								if (prefix == 'B') {
+									for (let j = 0; j < markers.length; j++) {
+										if (markers[j].getElementsByTagName('name')[0].innerHTML[0] == '/') {
+											B_end = parseFloat(markers[j].getElementsByTagName('in')[0].innerHTML) / timebase
+											if (B_end > time) {
+												break
+											}
+										}
+									}
+									// console.log('heading("' + time + '","' + B_end + '","' + text + '","0","left");')
+									newFunctions += 'heading("' + time + '","' + B_end + '","' + text + '","0","left");'
+								}
+								if ((prefix.length > 1) && (prefix[0] == 'B') || (prefix == '')) {
+									console.log('bullet("' + time + '","0","' + text + '");')
+									newFunctions += 'bullet("' + time + '","0","' + text + '");'
+								}
+							}
+							for (let i = 0; i < newChapters.length; i++) {
+								newChap(newChapters[i].time, newChapters[i].text)
+							}
+							document.getElementById('functionList').innerHTML += newFunctions
+							updateIfunctionsFromList()
+						}
+					}
+					setTimeout(() => {
+						document.forms["myform"].submit();
+					}, 1000);
+				}
+				dropZoneElement.classList.remove("drop-zone--over");
+			});
+		});
+		let optionChosen = "noSelection";
+
+		function AddOption() {
+			// 	videoRangeSelector
+			// let inputsDiv = document.getElementById("OptionsAndVideo");
+			// console.log(inputsDiv)
+			// if(inputsDiv.innerHTML !== null || inputsDiv.innerHTML !== undefined){
+			// 	inputsDiv.innerHTML = ""
+			// for (let i = initialOptions; i < 6; i++) {
+			// 	inputsDiv.innerHTML += `<div class="inputDiv">
+			// 		<label>Option ${initialOptions + 1}</label>
+			// 	<br />
+			// 	<input class="inputQuestion" type="text" id="QInput" />
+			// 	</div>`;
+			// 	initialOptions++;
+			// 	// correctOption(initialOptions);
+			// }
+			// }
+			// return true;
+		}
+
+		function AddOptionVideoInteractivityQuiz() {
+
+			// 	videoRangeSelector
+			inputOptionsArr = []
+			isQuizAdded = false
+			let sectionBody = document.getElementById("sectionVIQ");
+			videoPausePointArr = [];
+			return true;
+		}
+		function setVideoTime(time) {
+			console.log(document.getElementsByClassName("Testing2000"), "Conor Winter Asap")
+			let functionListArray = document.getElementById('functionList').innerHTML.split(";")
+			functionListArray = functionListArray.filter((data) => data.match(/Video_Interactivity_Timestamp/g))
+			console.log(functionListArray, "functionListArray".repeat(10))
+			let x = document.getElementsByTagName("output");
+			console.log(x, "x".repeat(100))
+			for (let i = 0; i < functionListArray.length; i++) {
+				let newTime = functionListArray[i].split(/["]/)[1];
+				// console.log(functionListArray.filter((data) => data.match(/Video_Interactivity_Timestamp/g)), "!!!!!!!!!!!!")
+				let min = parseInt(newTime);
+				console.log(functionList)
+				min = parseInt(newTime / 60)
+				console.log(min)
+				let sec = parseInt(newTime);
+				sec = parseInt(newTime % 60);
+				if (document.getElementsByTagName("output")[i] != undefined) {
+					document.getElementsByTagName("output")[i].value = time
+					//  `Time: ${min} min: ${sec} sec.`
+				}
+				// document.getElementById("timeDurationVideoInteractive").value = 10000
+				console.log(newTime, "HELLO WORLD")
+			}
+		}
+
+
+		function CheckOptionChosen() {
+			let x = document.getElementById("SelectOptions");
+			let options = document.querySelectorAll(".inputQuestion");
+			// if (x.value[x.value.length - 1] > newDataArr.length) {
+			// 	alert("Please choose an Option with input text.");
+			// 	return false;
+			// }
+		}
+		function AddAnotherQuiz() {
+
+			isQuizAdded = true
+			let QuestionsOption = {};
+			let inputs = document.querySelectorAll(".inputQuestion");
+			newDataArr = [];
+			if (inputs[0].value === "") {
+				alert("Please add a question");
+				return false;
+			}
+			let x = document.getElementById("SelectOptions");
+			if (x.value === "none") {
+				alert("Please select an option.");
+				return false;
+			}
+			correctSelectOption = x.value;
+			inputQuestion = inputs[0].value;
+			let videoPausePoint = document.querySelector("#minutes").value;
+			videoPausePoint = videoPausePoint
+				.replace(/[a-z:]/gi, "")
+				.split(" ")
+				.filter((val) => val !== "");
+			videoPausePoint = videoPausePoint.reduce((acc, time) => 60 * acc + +time);
+			QuestionsOption["Question"] = inputQuestion;
+			for (let i = 1; i < inputs.length; i++) {
+				if (inputs[i].value !== "") {
+					newDataArr.push(inputs[i].value);
+					QuestionsOption["Option" + i] = inputs[i].value
+					inputs[i].value = ""
+				}
+			}
+
+			correctSelectOption = correctSelectOption.match(/[0-9]/g);
+			QuestionsOption["correct"] = newDataArr[correctSelectOption - 1];
+			inputOptionsArr.push(QuestionsOption)
+			document.getElementById("section").style.display = "none";
+			videoPausePointArr.push(videoPausePoint)
+			index++;
+		}
+		function AddAnotherTimestamp() {
+			isQuizAdded = true
+			newDataArr = [];
+			let videoPausePoint = document.querySelector("#minutesVIQ").value;
+			videoPausePoint = videoPausePoint
+				.replace(/[a-z:]/gi, "")
+				.split(" ")
+				.filter((val) => val !== "");
+			videoPausePoint = videoPausePoint.reduce((acc, time) => 60 * acc + +time);
+			document.getElementById("sectionVIQ").style.display = "none";
+			videoPausePointArr.push(videoPausePoint)
+			index++;
+		}
+
+		function GenerateQuiz(type) {
+			updateIframe(functionList)
+			if (type === "timestamp") {
+				let bodySection = document.getElementById("sectionVIQ");
+				bodySection.innerHTML = "";
+				bodySection.innerHTML += `&lt;button class="button" id="submit" onclick="checkAnswer(true)" tabindex="0"&gt;
+  				&lt;strong&gt;play&lt;/strong&gt;&lt;/button
+  				&gt;&lt;br /&gt;&lt;br /&gt;`
+				let result = "";
+				result += "&lt;link rel='stylesheet'href='https://kaleem99.github.io/hostingContents/css/Interactivator.css'/&gt; &lt;div style='display: none;' id='OverlayDivVideoInteractive'&gt;&lt/div&gt;&lt;section style='z-index: 99; position: absolute; left: 0px; right: 0px; top: auto; height: 100px; bottom: 100px; background: none; margin: auto; display: none' id='section'&gt;" +
+					bodySection.innerHTML + "&lt;/section&gt;";
+				result = result.replace(/["]/gi, "'");
+				let IframeText = result;
+				let initialIframe = document.getElementById("iFrame").innerHTML;
+				let iframeQuiz = document.getElementById("iFrame");
+				iframeQuiz.innerHTML = IframeText +
+					initialIframe +
+					"&lt;script src='//fast.wistia.net/assets/external/E-v1.js' async &gt;&lt;/script&gt; &gt;&lt;script src='https://kaleem99.github.io/hostingContents/Interactivator.js'&gt;&lt;/script&gt;&lt;script&gt;quizComplete([" +
+					videoPausePointArr +
+					"]);&lt;/script&gt;";
+				document.getElementById("interactiveSelect").value = "Interactivity";
+			} else {
+				if (!isQuizAdded) {
+					return alert("Please ensure to Click the Add Quiz button before generating.")
+				}
+				let bodySection = document.getElementById("section");
+				bodySection.innerHTML = "";
+				bodySection.innerHTML += `&lt;h1 id="Question"&gt;&lt;/h1&gt; &lt;br&gt;`;
+				bodySection.innerHTML += `&lt;div id="InputSection"&gt;&lt;/div&gt;`
+				bodySection.innerHTML += `&lt;button class="button" id="submit" onclick="checkAnswer()" tabindex="0"&gt;
+  &lt;strong&gt;Submit&lt;/strong&gt;&lt;/button
+  &gt;&lt;br /&gt;&lt;br /&gt;
+  &lt;div id="results"&gt;&lt;/div&gt;`;
+				let result = "";
+				result += "&lt;link rel='stylesheet'href='https://kaleem99.github.io/hostingContents/css/Interactivator.css'/&gt; &lt;div style='display: none;' id='OverlayDiv'&gt;&lt/div&gt;&lt;section style='z-index: 99;position: absolute;left: 0; right: 0;top: 20%;display: none;' id='section'&gt;" +
+					bodySection.innerHTML + "&lt;/section&gt;";
+				result = result.replace(/["]/gi, "'");
+				let IframeText = result;
+				let initialIframe = document.getElementById("iFrame").innerHTML;
+				let iframeQuiz = document.getElementById("iFrame");
+				iframeQuiz.innerHTML = IframeText +
+					initialIframe +
+					"&lt;script src='//fast.wistia.net/assets/external/E-v1.js' async &gt;&lt;/script&gt; &gt;&lt;script src='https://kaleem99.github.io/hostingContents/Interactivator.js'&gt;&lt;/script&gt;&lt;script&gt;quizComplete([" +
+					videoPausePointArr +
+					"]," + JSON.stringify(inputOptionsArr) + ");&lt;/script&gt;";
+				document.getElementById("interactiveSelect").value = "Interactivity";
+			}
+			alert("Quiz generated.");
+		}
+		function correctOption(optionNum) {
+			let x = document.getElementById("SelectOptions");
+			let option = document.createElement("option");
+			option.text = "Option " + optionNum;
+			x.add(option);
+		}
+
+		function copyTextToClipBoard() {
+			let copiedCode = document.getElementById("iFrame").textContent;
+			let copied = document.getElementById("textDisplayCode");
+			copied.innerHTML = "Text Copied!";
+			copied.style.display = "block";
+			setTimeout(() => {
+				copied.innerHTML = "";
+				copied.style.display = "none";
+			}, 3000);
+			navigator.clipboard.writeText(copiedCode);
+		}
+
+		function reverseUpdate() {
+			let newIframe = document.getElementById('iFrame').innerText
+
+			let NewSrcAddendum = newIframe.split('?plugin%5Binteractivator%5D%5B')[1].split('&plugin%5Binteractivator%5D%5Bsrc%5D=https://kaleem99.github.io/hostingContents/content/Interactivator.js')[0]
+			NewSrcAddendum = decodeURI(NewSrcAddendum)
+
+			let newFunctions = NewSrcAddendum.split('&plugin[interactivator][functions]=')[1].split('&plugin[interactivator][')[0]
+			let newChapters = NewSrcAddendum.split('&plugin[interactivator][chapters]=')[1].split('&plugin[interactivator][')[0]
+
+
+			console.log(newFunctions)
+			console.log(newChapters)
+
+			document.getElementById('functionList').innerHTML = newFunctions
+			updateIfunctionsFromList()
+		}
+
+		function reverseUpdate() {
+			let newIframe = document.getElementById('iFrame').innerText
+
+			let NewSrcAddendum = newIframe.split('?plugin%5Binteractivator%5D%5B')[1].split('&plugin%5Binteractivator%5D%5Bsrc%5D=https://videos.getsmarter.com/Interactive+Video+Content/interactivator.js')[0]
+			NewSrcAddendum = decodeURI(NewSrcAddendum)
+
+			let newFunctions = NewSrcAddendum.split('&plugin[interactivator][functions]=')[1].split('&plugin[interactivator][')[0]
+			let newChapters = NewSrcAddendum.split('&plugin[interactivator][chapters]=')[1].split('&plugin[interactivator][')[0]
+
+
+
+
+			document.getElementById('functionList').innerHTML = newFunctions
+			updateIfunctionsFromList()
+		}
+
+	</script>
+</body>
+
+</html>

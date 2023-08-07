@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Testing Quiz</h1>
+    <div id="Test" class="Test"></div>
+  </body>
+  <script src="./Testing2.js"></script>
+  <button
+    id="Option 2"
+    class="buttonQuiz option correct"
+    onclick="let btnOpts1 = document.querySelectorAll('.buttonQuiz');
+    for(let i = 0; i < btnOpts1.length; i++){
+      btnOpts1[i].classList.remove('correct')
+    }
+    this.classList.add('correct')"
+  >
+    Kepler-1229
+  </button>
+  <button
+    id="Option 1"
+    class="buttonQuiz option"
+    onclick="let btnOpts2 = document.querySelectorAll('.buttonQuiz');
+    for(let i = 0; i < btnOpts2.length; i++){
+      btnOpts2[i].classList.remove('correct')
+    }
+    this.classList.add('correct')
+    "
+  >
+    Testing
+  </button>
+  <button
+    class="button"
+    id="submit"
+    onclick="
+  let options = document.querySelectorAll('.buttonQuiz');
+  let results = document.getElementById('results');
+  for(let i = 0; i < options.length; i++){
+    if(options[i].classList.contains('correct')){
+      if(options[i].id === 'Option 2'){
+        results.innerHTML = ('Correct')
+        break;
+      }
+      else{
+        results.innerHTML = ('Incorrect please try again.')
+        break;
+      }
+    }
+  }
+  "
+    tabindex="0"
+  >
+    <strong>Submit</strong>
+  </button>
+</html>
